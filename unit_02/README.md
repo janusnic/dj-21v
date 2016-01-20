@@ -994,7 +994,7 @@ namespace определен в url.
 4. test_home_title  method проверяет что home page title содержит "My Cool Django Site".
 5. test_h1_css method тестирут color. 
 
-```
+
 ./manage.py test f_test
 ------------------------
 ```
