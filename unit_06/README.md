@@ -72,7 +72,7 @@ blog/urs.py
 ------------
 ```
 urlpatterns = [
-```    
+
     url(r'^$', views.index, name='index'),
 
     url(r'^(?P<postslug>.*)/$', views.detail, name='detail' ),
@@ -89,6 +89,7 @@ def detail(request, postslug):
     
     return render(request, 'blog/detail.html', {'item': result})
 ```
+
 blog/index.html
 ---------------
 ```
