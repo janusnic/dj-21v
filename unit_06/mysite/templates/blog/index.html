@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block head_title %}My Cool Django Blog{% endblock %}
+
+{% block content %} 
+      <!-- row of columns -->
+      <div class="row">
+        <div class="col-md-8">
+          <h2>Publications</h2>
+              {% if blog_list %}
+                {% for item in blog_list %}
+                  <h3><a href ="{% url 'blog:detail' item.slug %}">{{ item.title }}</a></h3>
+                    <p><a class="btn btn-default" href="{% url 'blog:detail' item.slug %}" role="button">View details &raquo;</a></p>
+                {% endfor %}
+              {% else %}
+                <li>Sorry, no items in this list.</li>
+              {% endif %}
+          
+        </div>
+        <div class="col-md-4">
+          <h2>Categorits</h2>
+          {% if categories_list %}       
+            <ul>
+                {% for category in categories_list %}
+                <li><a href ="{% url 'blog:category' category.slug %}">{{ category.name }}</a></li>
+                {% endfor %}
+            </ul>
+
+            {% else %}
+            <strong>There are no categories present.</strong>
+          {% endif %}
+
+          <h2>Tags</h2>
+          {% if tags_name %}       
+            <ul>
+                {% for tag in tags_name %}
+                <li><a href ="">{{ tag.name }}</a></li>
+                {% endfor %}
+            </ul>
+
+            {% else %}
+            <strong>There are no tags present.</strong>
+          {% endif %}
+          
+       </div>
+        
+      </div>
+
+{% endblock content %}
