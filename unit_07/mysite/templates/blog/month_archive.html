@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load latest_posts popular_posts %}
+
+{% block head_title %} {{ block.super }} - Monthly archive {% endblock %}
+
+
+{% block content %} 
+      <!-- row of columns -->
+      <div class="row">
+        <div class="col-md-8">
+          <h2>Publications</h2>
+              {% if blog_list %}
+                {% for item in blog_list %}
+                  <h3><a href ="{% url 'blog:detail' item.slug %}">{{ item.title }}</a></h3>
+                    <p><a class="btn btn-default" href="{% url 'blog:detail' item.slug %}" role="button">View details &raquo;</a></p>
+                {% endfor %}
+              {% else %}
+                <li>Sorry, no items in this list.</li>
+              {% endif %}
+        
+                <!-- Next/Prev page links  --> 
+      {% if blog_list.object_list and blog_list.paginator.num_pages > 1 %} 
+        <div class="pagination" style="margin-top: 20px; margin-left: -20px; "> 
+            <span class="step-links"> 
+                {% if blog_list.has_previous %} 
+                    <a href= "?page={{ blog_list.previous_page_number }}">newer entries &lt;&lt; </a> 
+                {% endif %} 
+
+                <span class="current"> 
+                    &nbsp;Page {{ blog_list.number }} of {{ blog_list.paginator.num_pages }} 
+                </span> 
+
+                {% if blog_list.has_next %} 
+                    <a href="?page={{ blog_list.next_page_number }}"> &gt;&gt; older entries</a> 
+                {% endif %} 
+            </span> 
+        </div> 
+       {% endif %}
+
+        </div>
+        <div class="col-md-4">
+          <h3>Categorits</h3>
+          {% if categories_list %}       
+            <ul>
+                {% for category in categories_list %}
+                <li><a href ="{% url 'blog:category' category.slug %}">{{ category.name }}</a></li>
+                {% endfor %}
+            </ul>
+
+            {% else %}
+            <strong>There are no categories present.</strong>
+          {% endif %}
+
+          <h3>Tags</h3>
+          {% if tags_name %}       
+            <ul>
+                {% for tag in tags_name %}
+                <li><a href ="">{{ tag.name }}</a></li>
+                {% endfor %}
+            </ul>
+
+            {% else %}
+            <strong>There are no tags present.</strong>
+          {% endif %}
+
+          <h3>Latest Posts</h3>
+          <div>
+          {% latest_posts %}
+          </div>
+          <h3>Popular Posts</h3>
+          <div>
+          {% popular_posts %}
+          </div>
+          <h3>Monthly Archive</h3>
+          <div>
+          {% for month in months %} 
+            <a href="{% url 'blog:archive' month.0 month.1 %}">{{ month.2 }}</a> <br /> 
+        {% endfor %} 
+        </div>
+
+       </div>
+        
+      </div>
+
+{% endblock content %}
