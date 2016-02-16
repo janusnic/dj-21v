@@ -1,0 +1,6 @@
+<!-- _latest_posts.html -->
+<ul>
+  {% for p in posts %}
+    <li><a href="{% url 'blog:detail' p.slug %}">{{ p.title }}</a>
+  {% endfor %}
+</ul>

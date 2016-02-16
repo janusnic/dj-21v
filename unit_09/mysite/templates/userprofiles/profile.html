@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block head_title %}My Cool Django Blog  {% endblock %}
+
+      <!-- row of columns -->
+      {% block content %}
+
+            {% block main %}
+            {% endblock main %}
+
+            {% block aside %}
+
+                   <h2>Menu</h2>
+
+                    <ul>
+                      <li><a href='{% url "blog:profile" user.username %}'>My profile</a></li>
+                      <li><a href='{% url "blog:edit_user" %}'>Edit user</a></li>
+                      <li><a href='{% url "blog:edit_profile" %}'>Edit my profile</a></li>
+
+                    </ul>
+
+            {% endblock aside %}
+        {% endblock content %}
