@@ -1,0 +1,22 @@
+{% extends "news.html" %}
+
+{% block content %}
+    {% include "_entry.html" with entry=entry only %}
+    <hr>
+    <h4>Comments</h4>
+    {% for comment in entry.comment_set.all %}
+        <p>
+            <em>Posted by {{ comment.name }}</em>
+            <img src="{{ comment.gravatar_url }}" align="left">
+        </p>
+        {{ comment|linebreaks }}
+    {% empty %}
+        No comments yet.
+    {% endfor %}
+    <h5>Add a comment</h5>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_table }}
+        <input type="submit" value="Create Comment">
+    </form>
+{% endblock %}
