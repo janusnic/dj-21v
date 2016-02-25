@@ -1,0 +1,36 @@
+{% extends "blog/layout.html" %}
+{% load humanize %}
+{% block head_title %} {{ block.super }} - Blog Topik{% endblock %}
+
+        {% block content %} 
+        
+        <div class="row">
+          <div class="col-md-8">
+          {% block main %} 
+          <h2>{{ result.title }}</h2>
+          {% autoescape off %}
+                <p> {{ result.content }} </p>
+                {% endautoescape %}
+          
+          <p> {{ result.publish_date|date:"D d M Y" }} | <a href ="{% url 'blog:category' result.category.slug %}">{{ result.category }}</a> | {% for tag in result.tags.all %}
+                <span> {{ tag.name }} </span> {% endfor %}
+                {% if result.views > 1 %}
+                    ({{ result.views }} views)
+                {% elif result.views == 1 %}
+                    ({{ result.views }} view)
+                {% endif %}
+          </p>
+
+          <p><a class="btn btn-default" href="{% url 'blog:index' %}" role="button">All publications &raquo;</a></p>
+          {% endblock main %} 
+          
+          </div>
+        
+           <div class="col-md-4">   
+             {% block aside %} 
+                {{ block.super }}         
+             {% endblock aside %}
+           </div>    
+         
+         </div>
+        {% endblock content %}

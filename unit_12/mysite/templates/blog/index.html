@@ -1,0 +1,28 @@
+{% extends "blog/layout.html" %}
+{% block head_title %} {{ block.super }} - All Blog Publications{% endblock %}
+
+        {% block content %} 
+        
+        <div class="row">
+          <div class="col-md-8">
+          {% block main %} 
+            <h2>Publications</h2>
+              {% if blog_list %}
+                {% for item in blog_list %}
+                  <h3><a href ="{% url 'blog:detail' item.slug %}">{{ item.title }}</a></h3>
+                    <p><a class="btn btn-default" href="{% url 'blog:detail' item.slug %}" role="button">View details &raquo;</a></p>
+                {% endfor %}
+              {% else %}
+                <li>Sorry, no items in this list.</li>
+             {% endif %}
+          {% endblock main %} 
+          </div>
+        
+           <div class="col-md-4">   
+             {% block aside %} 
+                {{ block.super }}         
+             {% endblock aside %}
+           </div>    
+         
+         </div>
+        {% endblock content %}

@@ -1,0 +1,13 @@
+<article>
+
+    <h2><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h2>
+
+    <p class="subheader">
+        <time>{{ article.publish_date|date }}</time>
+    </p>
+
+    <p></p>
+
+    {{ article.content|linebreaks }}
+
+</article>
