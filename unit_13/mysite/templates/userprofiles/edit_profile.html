@@ -1,0 +1,38 @@
+{% extends "userprofiles/profile.html" %}
+{% block head_title %} {{ block.super }} - Your profile {% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-8">
+
+{% block main %}
+
+<div class="row-fluid">
+  <div class="span4 offset4">
+
+<h2>{{ user.username }}'s Profile</h2>
+
+<form method="post" action="" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_div }}
+  <input type="submit" value="Change profile">
+</form>
+
+
+</div>
+</div>
+{% endblock main %}
+</div>
+
+<div class="col-md-4">
+{% block aside %}
+{% if object.profile_picture %}
+<img src='/media/{{ object.profile_picture }}'>
+ {% endif %}
+ {{ block.super }}
+
+{% endblock aside %}
+</div>
+    </div>
+
+{% endblock %}

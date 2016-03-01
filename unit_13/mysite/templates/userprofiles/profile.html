@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block head_title %} {{ block.super }} - Profile {% endblock %}
+      {% block content %}
+            {% block main %}
+            {% endblock main %}
+            {% block aside %}
+                   <h2>Menu</h2>
+                    <ul>
+                      <li><a href='{% url "users:profile" user.username %}'>My profile</a></li>
+                      <li><a href='{% url "users:edit_profile" %}'>Edit my profile</a></li>
+
+                    </ul>
+            {% endblock aside %}
+        {% endblock content %}
