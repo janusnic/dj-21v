@@ -1,0 +1,47 @@
+{% load staticfiles %}
+{% load blog_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Blog</title>
+    <link rel="stylesheet" href="{% static "css/foundation.css" %}">
+    <link rel="stylesheet" href="{% static "css/main.css" %}">
+
+    <script src="{% static "js/vendor/jquery-1.11.2.min.js" %}"></script>
+    <script>
+        $(document).ready(function(){
+            $("#comments").on("click", ".reply", function(event){
+                event.preventDefault();
+                var form = $("#postcomment").clone(true);
+                form.find('.parent').val($(this).parent().parent().attr('id'));
+                $(this).parent().append(form);
+            });
+        });
+    </script>
+</head>
+<body>
+    <section class="row">
+        <header class="large-12 columns">
+            <h1>Welcome to My Blog</h1>
+            <hr>
+        </header>
+    </section>
+
+    <section class="row">
+
+        <div class="large-8 columns">
+            {% block content %}{% endblock %}
+        </div>
+
+        <div class="large-4 columns">
+            <h3>About Me</h3>
+            <p><a href='/'>Home Page</a></p>
+            <p>I am a Python developer and I like Django.</p>
+            <h3>Recent Entries</h3>
+            {% entry_history %}
+        </div>
+
+    </section>
+
+</body>
+</html>

@@ -1,0 +1,141 @@
+{% load staticfiles %}
+<!doctype html>
+<html>
+    <head>
+        <title>Home Page</title>
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    </head>
+    <body>
+        <h1>Home Page</h1>
+        My first name is {{ first_name }}. My last name is {{ last_name }}.<br>
+        {{ my_dict.key }}<br>
+        {{ my_list.1 }}<br>
+        {{ my_object.attribute }}
+        <br>
+        
+        <br>
+
+        {% autoescape on %}
+            <h2>autoescape on</h2>
+            {{ name }}
+        {% endautoescape %}
+        
+        {% comment "Optional note" %}
+            {% autoescape off %}
+                <h3>autoescape off</h3>
+                {{ name }}
+            {% endautoescape %}
+        {% endcomment %}
+
+        <table>
+        <caption><h2>Test Table</h2></caption>
+        {% for o in my_list %}
+            <tr class="{% cycle 'row1' 'row2' %}">
+                <td><img src='static/img/star.png'></td><td><img src='static/img/star.png'></td>
+            </tr>
+        {% endfor %}
+        </table>
+
+        
+
+        <table>
+        <caption><h2>Border Table</h2></caption>
+        {% for o in my_list %}
+            <tr>
+                <td style="{% autoescape off %}{% cycle rowclass1 rowclass2  %}{% endautoescape %}"><img src='static/img/star.png'></td><td><img src='static/img/star.png'></td>
+            </tr>
+        {% endfor %}
+        </table>
+        <table>
+        <caption><h2>Background Table</h2></caption>
+        <tr>
+            <td class="{% cycle 'row1' 'row2' as rowcolors %}">Background Table</td>
+            <td class="{{ rowcolors }}">Background Table</td>
+        </tr>
+        <tr>
+            <td class="{% cycle rowcolors %}">Background Table</td>
+            <td class="{{ rowcolors }}">Background Table</td>
+        </tr>
+        </table>
+        <h2>Категории</h2>
+        <ul>
+        {% for cat in categories %}
+            <li>{{ cat.name }}</li>
+        {% endfor %}
+        </ul>
+
+        <h2>Категории reversed</h2>
+        <ul>
+        {% for cat in categories reversed %}
+            <li>{{ cat.name }}</li>
+        {% endfor %}
+        </ul>
+        <ul>
+        {% for data in categories %}
+        {% for key, value in data.items %}
+            <li>{{ key }}: {{ value }}</li>
+        {% endfor %}
+        {% endfor %}
+        </ul>
+
+        
+        <h2>Категории</h2>
+        <ul>
+        {% for cat in categories %}
+            <li>{{ forloop.counter }} {{ cat.name }}</li>
+        {% endfor %}
+        </ul>
+        <h2>Lorem</h2>
+
+        {% lorem %} выведет обычный параграф “lorem ipsum”.
+
+        {% lorem 3 p %} выведет обычный параграф “lorem ipsum” и два случайных параграфа, обернутые в HTML тег p.
+
+        {% lorem 2 w random %} выведет два случайных слова на латыни.
+
+        <h2>Cities</h2>
+        {% regroup cities by country as country_list %}
+
+        <ul>
+        {% for country in country_list %}
+            <li>{{ country.grouper }}
+            <ul>
+                {% for item in country.list %}
+                  <li>{{ item.name }}: {{ item.population }}</li>
+                {% endfor %}
+            </ul>
+            </li>
+        {% endfor %}
+        </ul>
+
+        
+        <h2>Cities|dictsort</h2>
+        {% regroup cities|dictsort:"country" by country as country_list %}
+
+        <ul>
+        {% for country in country_list %}
+            <li>{{ country.grouper }}
+            <ul>
+                {% for item in country.list %}
+                  <li>{{ item.name }}: {{ item.population }}</li>
+                {% endfor %}
+            </ul>
+            </li>
+        {% endfor %}
+        </ul>
+        <h2>url</h2>
+
+        <a href="{% url 'some-url-name' %}">Example 1 </a>
+
+        
+       
+        <h2>Debug</h2>
+        {% comment %}
+        {% debug %}
+        {% endcomment %}
+
+
+    
+    </body>
+
+</html>

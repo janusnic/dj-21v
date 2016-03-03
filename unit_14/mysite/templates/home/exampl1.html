@@ -1,0 +1,16 @@
+{% load staticfiles %}
+<!doctype html>
+<html>
+    <head>
+        <title>Example 1 Page</title>
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    </head>
+    <body>
+        <h1>Example 1 Page</h1>
+        <h3>Article</h3>
+      
+        <a href="{% url 'app-views-article' 1 %}">Article 1 </a>
+    
+    </body>
+
+</html>

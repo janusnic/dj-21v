@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block head_title %} {{ block.super }} - Register with Blog {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+    <h2>Register with Janus Blog</h2>
+    <form action="." method="post" class="form-horisontal" role="form">
+      <div class="form-group">
+        {% csrf_token %}
+        <fieldset>
+            {{ form.as_p }}
+        </fieldset>
+      </div>
+      </div>
+      <div class="row">
+      <div class="form-group">
+        <fieldset class="submit-row">
+            <p><button type="submit" class="btn btn-info">Create account</button></p>
+        </fieldset>
+      </div>
+    </form>
+    </div>
+</div>
+{% endblock %}

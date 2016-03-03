@@ -1,0 +1,33 @@
+{% extends "news.html" %}
+{% load humanize %}
+{% block content %}
+    {% include "_entry.html" with article=article only %}
+    <hr>
+
+    {% if user.is_authenticated %}
+
+    <h5>Hi {{ user }}! Add a comment</h5>
+    <form id="postcomment" method="post">
+        {% csrf_token %}
+        {{ form.as_table }}
+
+        <input type="submit" value="Create Comment">
+    </form>
+    {% endif%}
+
+    <h4>Comments</h4>
+    <ul id="comments">
+    {% for comment in comment_tree %}
+    {% if comment.user %}
+        <li id="{{comment.id}}" class="comment" style="margin-left:{{comment.depth|add:comment.depth}}em;"><p class="poster"><span class="user">{% if comment.user.get_full_name %}{{comment.user.get_full_name}}{% else %}{{comment.user.username}}{% endif %}</span> - {{comment.modified_at|naturaltime}}</p><p>{{comment.content|safe}}</p><p><a href="" class="reply">reply</a></p></li>
+    {% elif comment.name %}
+        <li id="{{comment.id}}" class="comment" style="margin-left:{{comment.depth|add:comment.depth}}em;"><p class="poster">{% if comment.website %}<a href="{{comment.website}}">{{comment.name}}</a>{% else %}{{comment.name}}{% endif %} - {{comment.modified_at|naturaltime}}</p><p>{{comment.content|safe}}</p><p><a href="" class="reply">reply</a></p></li>
+    {% else %}
+        <li id="{{comment.id}}" class="comment" style="margin-left:{{comment.depth|add:comment.depth}}em;"><p class="poster">Anonymous - {{comment.modified_at|naturaltime}}</p><p>{{comment.content|safe}}</p><p><a href="" class="reply">reply</a></p></li>
+    {% endif %}
+    {% empty %}
+        No comments yet.
+    {% endfor %}
+    </ul>
+
+{% endblock %}
