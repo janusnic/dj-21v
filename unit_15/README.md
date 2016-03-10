@@ -1050,7 +1050,7 @@ class CouponApplyForm(forms.Form):
 {% block title %}
     {% trans "Checkout" noop %}
 {% endblock %}
-```
+
 
 ```
 
