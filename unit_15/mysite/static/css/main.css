@@ -1,0 +1,65 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+.jumbotron h1 {
+    color: rgba(200, 50, 255, 1);
+}
+.row1 {
+    background-color: red;
+} 
+
+.row2 {
+    background-color: green;
+}
+
+
+#comments a {
+            font-weight: bold;
+            color: #ff982c;
+            text-decoration: none;
+        }
+ 
+#comments a:hover {
+            text-decoration: underline;
+        }
+        
+#comments {
+            padding-left: 0px;
+        }
+        
+#comments li {
+               list-style-type: none;
+            }
+        
+.poster {
+            font-size: 12px;
+            color: #AAAAAA;
+        }
+        
+#postcomment ul {
+            padding-left: 0px;
+            list-style-type: none;
+        }
+        
+#postcomment ul li {
+                list-style-type:  none;
+                padding-bottom: 5px;
+            }
+                
+#postcomment label {
+            width: 74px;
+            display: inline-block;
+        }
+        
+.comment {
+            font-size: 14px;
+            background: #0E0E0E;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
+            color: #FFFFFF;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
